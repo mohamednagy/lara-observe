@@ -4,6 +4,7 @@ namespace Nagy\LaraObserve;
 use Nagy\LaraObserve\Logger;
 use Nagy\LaraObserve\Formatter;
 use Illuminate\Support\Facades\DB;
+use Nagy\LaraObserve\Exceptions\SlowQueryException;
 
 class LaraObserve
 {

@@ -3,7 +3,7 @@
 namespace Nagy\LaraObserve\Tests;
 
 use Orchestra\Testbench\TestCase as Orchestra;
-use Nagy\LaraObserve\SlowQueryException;
+use Nagy\LaraObserve\Exceptions\SlowQueryException;
 
 abstract class TestCase extends Orchestra
 {

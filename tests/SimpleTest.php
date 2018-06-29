@@ -2,6 +2,8 @@
 
 namespace Nagy\LaraObserve\Tests;
 
+use Nagy\LaraObserve\Exceptions\SlowQueryException;
+
 class SimpleTest extends TestCase
 {
     public function setUp()
@@ -12,7 +14,7 @@ class SimpleTest extends TestCase
     /** @test */
     public function databaseHasUser()
     {
-        $this->expectException(\Nagy\LaraObserve\SlowQueryException::class);
+        $this->expectException(SlowQueryException::class);
         
         $this->assertDatabaseMissing('users', [
             'email' => 'test@test.com'
