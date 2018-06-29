@@ -8,8 +8,9 @@ class SlowQueryException extends \Exception
     {
         parent::__construct($message);
     }
-    
+
+    public function report()
+    {
+        logger()->info(config('laraveldb.report.title') . $this->getMessage());
+    }
 }
-
-
-?>

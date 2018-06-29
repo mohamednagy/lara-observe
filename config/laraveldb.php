@@ -9,5 +9,8 @@ return [
     /**
      * A threshold which should be notified if the query execution time exceeded
      */
-    'threshold' => 0.000009
+    'threshold' => 0.000009,
+    'report' => [
+        'title' => 'Slow query detected: ',
+    ]
 ];
