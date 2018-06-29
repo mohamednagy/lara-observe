@@ -1,29 +1,23 @@
 <?php
 
 return [
-    /**
-     * 
-     */
-    'active' => env('LARA_OBSERVE_ACTIVE', true),
-    
-    /**
-     * A threshold which should be notified if the query execution time exceeded
-     */
-    'threshold' => 0.000009,
+    'logger' => \Psr\Log\LoggerInterface::class,
 
-    /**
-     * Reporting config
-     */
-    'report' => [
-        'active' => env('LARA_OBSERVE_REPORT', true),
-        'title' => 'Slow query detected',
+    'queries' => [
+        'active' => env('LARA_OBSERVE_QUERIES_ACTIVE', true),
+        'threshold' => 0.000009,
+        'report' => [
+            'active' => env('LARA_OBSERVE_QUERIES_REPORT', true),
+            'title' => 'Slow query detected',
+        ],
     ],
 
     'requests' => [
         'active' => true,
-
-        'threshold' => 0.0009
+        'threshold' => 0.0009,
+        'report' => [
+            'active' => env('LARA_OBSERVE_REQUESTS_REPORT', true),
+            'title' => 'Slow request detected',
+        ],
     ],
-
-    'logger' => \Psr\Log\LoggerInterface::class
 ];
