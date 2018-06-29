@@ -11,7 +11,9 @@ class SlowQueryException extends \Exception
 
     public function report()
     {
-        logger()->info($this->prepareReportMessage());
+        if (config('laraobserve.report.active')) {
+            logger()->info($this->prepareReportMessage());
+        }
     }
 
     private function prepareReportMessage(): string

@@ -12,9 +12,10 @@ return [
     'threshold' => 0.000009,
 
     /**
-     * Messages to be added to the report message
+     * Reporting config
      */
     'report' => [
+        'active' => env('LARA_OBSERVE_REPORT', true),
         'title' => 'Slow query detected',
     ],
 ];
