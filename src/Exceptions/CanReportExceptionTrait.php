@@ -6,13 +6,24 @@ trait CanReportExceptionTrait
 {
     public function report()
     {
-        if ($this->config->get('active')) {
-            $this->logger->info($this->prepareReportMessage());
+        if ($this->getConfig()->get('active')) {
+            $this->getLogger()->info($this->getReportMessage());
         }
     }
 
-    protected function prepareReportMessage(): string
+    public function getReportMessage(): string
     {
-        return $this->config->get('report.title') . ': ' . $this->getMessage();
+        $msg = $this->getConfig()->get('report.title') . ': ' . $this->getMessage();
+        if ($request = $this->getRequest()) {
+            $msg .= PHP_EOL . 'Url: ' . $request->url();
+        }
+
+        dd($this->getCommand());
+
+        if ($command = $this->getCommand()) {
+            $msg .= PHP_EOL . 'Command: ' . $command;
+        }
+
+        return $msg;
     }
 }
