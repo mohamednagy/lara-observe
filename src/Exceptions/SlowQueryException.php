@@ -1,6 +1,6 @@
 <?php
 
-namespace Nagy\LaraObserve;
+namespace Nagy\LaraObserve\Exceptions;
 
 use Psr\Log\LoggerInterface;
 

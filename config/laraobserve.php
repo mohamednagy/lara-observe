@@ -18,10 +18,12 @@ return [
         'active' => env('LARA_OBSERVE_REPORT', true),
         'title' => 'Slow query detected',
     ],
-    
+
     'requests' => [
         'active' => true,
 
         'threshold' => 0.0009
-    ]
+    ],
+
+    'logger' => \Psr\Log\LoggerInterface::class
 ];
