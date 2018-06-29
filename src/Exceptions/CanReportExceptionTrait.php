@@ -7,7 +7,7 @@ trait CanReportExceptionTrait
     public function report()
     {
         if ($this->getConfig()->get('active')) {
-            $this->getLogger()->info($this->getReportMessage());
+            $this->getLogger()->warning($this->getReportMessage());
         }
     }
 
@@ -17,8 +17,6 @@ trait CanReportExceptionTrait
         if ($request = $this->getRequest()) {
             $msg .= PHP_EOL . 'Url: ' . $request->url();
         }
-
-        dd($this->getCommand());
 
         if ($command = $this->getCommand()) {
             $msg .= PHP_EOL . 'Command: ' . $command;
