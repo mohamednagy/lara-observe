@@ -2,17 +2,25 @@
 
 namespace Nagy\LaraObserve;
 
+use Psr\Log\LoggerInterface;
+
 class SlowQueryException extends \Exception
 {
+    /**
+     * @var LoggerInterface
+     */
+    protected $logger;
+
     public function __construct(string $message)
     {
         parent::__construct($message);
+        $this->logger = app(config('laraobserve.report.logger'));
     }
 
     public function report()
     {
         if (config('laraobserve.report.active')) {
-            logger()->info($this->prepareReportMessage());
+            $this->logger->info($this->prepareReportMessage());
         }
     }
 
