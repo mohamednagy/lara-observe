@@ -17,4 +17,10 @@ return [
     'report' => [
         'title' => 'Slow query detected',
     ],
+    
+    'requests' => [
+        'active' => true,
+
+        'threshold' => 0.0009
+    ]
 ];
