@@ -34,7 +34,6 @@ class SlowRequestException extends \Exception
     public function __construct(string $message)
     {
         parent::__construct($message);
-        $this->setConfig(config('laraobserve.requests'));
         $this->logger = app(config('laraobserve.logger')) ?? logger();
         $this->config = new Config(config('laraobserve.requests'));
     }
