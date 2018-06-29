@@ -12,6 +12,10 @@ class LaravelDB
         $formatter = new Formatter();
         
         DB::listen(function ($query) use ($formatter) {
+            if (! config('laraveldb.active')) {
+                return;
+            }
+            
             if ($query instanceof \Illuminate\Database\Events\QueryExecuted) {
                 throw_if(
                     $query->time > config('laraveldb.threshold'),

@@ -12,14 +12,11 @@ class SimpleTest extends TestCase
     /** @test */
     public function databaseHasUser()
     {
-        try {
-            $this->assertDatabaseMissing('users', [
-                'email' => 'test@test.com'
-            ]);
-        } catch (\Exception $e) {
-            dd($e->getMessage());
-            $this->assertTrue(true);
-        }
+        $this->expectException(\Nagy\LaravelDB\SlowQueryException::class);
+        
+        $this->assertDatabaseMissing('users', [
+            'email' => 'test@test.com'
+        ]);
     }
 }
 

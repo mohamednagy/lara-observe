@@ -3,6 +3,7 @@
 namespace Nagy\LaravelDB\Tests;
 
 use Orchestra\Testbench\TestCase as Orchestra;
+use Nagy\LaravelDB\SlowQueryException;
 
 abstract class TestCase extends Orchestra
 {
@@ -10,7 +11,6 @@ abstract class TestCase extends Orchestra
     {
         parent::setUp();
         $this->setUpDatabase($this->app);
-        
     }
     /**
      * Set up the environment.
@@ -26,12 +26,15 @@ abstract class TestCase extends Orchestra
             'prefix'   => '',
         ]);
         $app['config']->set('app.key', env('APP_KEY'));
+        $app['config']->set('laraveldb.active', false);
     }
 
     public function setUpDatabase($app)
     {
         $this->loadMigrationsFrom(realpath(__DIR__.'/database/migrations'));
         $this->artisan('migrate');
+        $this->app['config']->set('laraveldb.active', true);
+
     }
 
     /**
@@ -44,5 +47,11 @@ abstract class TestCase extends Orchestra
         return [
             \Nagy\LaravelDB\ServiceProvider::class,
         ];
+    }
+
+    protected function tearDown()
+    {
+        $this->app['config']->set('laraveldb.active', false);
+        parent::tearDown();
     }
 }
