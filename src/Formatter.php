@@ -1,5 +1,5 @@
 <?php
-namespace Nagy\LaravelDB;
+namespace Nagy\LaraObserve;
 
 class Formatter
 {

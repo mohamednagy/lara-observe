@@ -1,5 +1,5 @@
 <?php
-namespace Nagy\LaravelDB;
+namespace Nagy\LaraObserve;
 
 use Illuminate\Support\ServiceProvider as LaravelServiceProvider;
 
@@ -13,11 +13,11 @@ class ServiceProvider extends LaravelServiceProvider
     public function boot()
     {
         $this->publishes([
-            __DIR__.'/../config/laraveldb.php' => config_path('laraveldb.php'),
+            __DIR__.'/../config/Laraobserve.php' => config_path('Laraobserve.php'),
         ], 'config');
 
         // boot the observer
-        LaravelDB::boot();
+        LaraObserve::boot();
     }
 
     /**
@@ -27,7 +27,7 @@ class ServiceProvider extends LaravelServiceProvider
     public function register()
     {
         $this->mergeConfigFrom(
-            __DIR__.'/../config/laraveldb.php', 'laraveldb'
+            __DIR__.'/../config/Laraobserve.php', 'Laraobserve'
         );
     }
 }

@@ -1,24 +1,24 @@
 <?php
-namespace Nagy\LaravelDB;
+namespace Nagy\LaraObserve;
 
-use Nagy\LaravelDB\Logger;
-use Nagy\LaravelDB\Formatter;
+use Nagy\LaraObserve\Logger;
+use Nagy\LaraObserve\Formatter;
 use Illuminate\Support\Facades\DB;
 
-class LaravelDB
+class LaraObserve
 {
     public static function boot()
     {
         $formatter = new Formatter();
         
         DB::listen(function ($query) use ($formatter) {
-            if (! config('laraveldb.active')) {
+            if (! config('LaraObserve.active')) {
                 return;
             }
-            
+
             if ($query instanceof \Illuminate\Database\Events\QueryExecuted) {
                 throw_if(
-                    $query->time > config('laraveldb.threshold'),
+                    $query->time > config('LaraObserve.threshold'),
                     new SlowQueryException($formatter->setQuery($query)->format())
                 );
             }

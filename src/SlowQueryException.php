@@ -1,6 +1,6 @@
 <?php
 
-namespace Nagy\LaravelDB;
+namespace Nagy\LaraObserve;
 
 class SlowQueryException extends \Exception
 {

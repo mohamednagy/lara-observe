@@ -1,9 +1,9 @@
 <?php
 
-namespace Nagy\LaravelDB\Tests;
+namespace Nagy\LaraObserve\Tests;
 
 use Orchestra\Testbench\TestCase as Orchestra;
-use Nagy\LaravelDB\SlowQueryException;
+use Nagy\LaraObserve\SlowQueryException;
 
 abstract class TestCase extends Orchestra
 {
@@ -26,14 +26,14 @@ abstract class TestCase extends Orchestra
             'prefix'   => '',
         ]);
         $app['config']->set('app.key', env('APP_KEY'));
-        $app['config']->set('laraveldb.active', false);
+        $app['config']->set('LaraObserve.active', false);
     }
 
     public function setUpDatabase($app)
     {
         $this->loadMigrationsFrom(realpath(__DIR__.'/database/migrations'));
         $this->artisan('migrate');
-        $this->app['config']->set('laraveldb.active', true);
+        $this->app['config']->set('LaraObserve.active', true);
 
     }
 
@@ -45,13 +45,13 @@ abstract class TestCase extends Orchestra
     protected function getPackageProviders($app)
     {
         return [
-            \Nagy\LaravelDB\ServiceProvider::class,
+            \Nagy\LaraObserve\ServiceProvider::class,
         ];
     }
 
     protected function tearDown()
     {
-        $this->app['config']->set('laraveldb.active', false);
+        $this->app['config']->set('LaraObserve.active', false);
         parent::tearDown();
     }
 }

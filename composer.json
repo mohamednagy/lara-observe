@@ -1,6 +1,6 @@
 {
-    "name": "nagy/laravel-db",
-    "description": "laravel db queries observer",
+    "name": "nagy/laravel-observe",
+    "description": "laravel observer",
     "type": "library",
     "license": "MIT",
     "authors": [
@@ -19,8 +19,8 @@
     },
     "autoload": {
         "psr-4": {
-            "Nagy\\LaravelDB\\": "src",
-            "Nagy\\LaravelDB\\Tests\\": "tests"
+            "Nagy\\LaraObserve\\": "src",
+            "Nagy\\LaraObserve\\Tests\\": "tests"
         }
     }
 }

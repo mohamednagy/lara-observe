@@ -1,6 +1,6 @@
 <?php
 
-namespace Nagy\LaravelDB\Tests;
+namespace Nagy\LaraObserve\Tests;
 
 class SimpleTest extends TestCase
 {
@@ -12,7 +12,7 @@ class SimpleTest extends TestCase
     /** @test */
     public function databaseHasUser()
     {
-        $this->expectException(\Nagy\LaravelDB\SlowQueryException::class);
+        $this->expectException(\Nagy\LaraObserve\SlowQueryException::class);
         
         $this->assertDatabaseMissing('users', [
             'email' => 'test@test.com'
