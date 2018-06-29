@@ -1,0 +1,26 @@
+{
+    "name": "nagy/laravel-db",
+    "description": "laravel db queries observer",
+    "type": "library",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Mohamed Nagy",
+            "email": "mohamed.n.haleem@gmail.com"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require": {
+        "illuminate/database": "^5.6",
+        "illuminate/support": "^5.6"
+    },
+    "require-dev": {
+        "orchestra/testbench": "^3.7@dev"
+    },
+    "autoload": {
+        "psr-4": {
+            "Nagy\\LaravelDB\\": "src",
+            "Nagy\\LaravelDB\\Tests\\": "tests"
+        }
+    }
+}
