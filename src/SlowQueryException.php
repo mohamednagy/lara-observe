@@ -8,8 +8,15 @@ class SlowQueryException extends \Exception
     {
         parent::__construct($message);
     }
+
+    public function report()
+    {
+        logger()->info($this->prepareReportMessage());
+    }
+
+    private function prepareReportMessage(): string
+    {
+        return config('laraobserve.report.title') . ': ' . $this->getMessage();
+    }
     
 }
-
-
-?>
