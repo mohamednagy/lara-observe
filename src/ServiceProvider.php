@@ -27,7 +27,7 @@ class ServiceProvider extends LaravelServiceProvider
     public function register()
     {
         $this->mergeConfigFrom(
-            __DIR__.'/../config/Laraobserve.php', 'Laraobserve'
+            __DIR__.'/../config/laraobserve.php', 'laraobserve'
         );
     }
 }

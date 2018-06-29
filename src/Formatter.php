@@ -23,4 +23,3 @@ class Formatter
         return '('.$this->query->time.') '.$this->getFullRawSql();
     }
 }
-
