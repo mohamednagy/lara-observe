@@ -1,4 +1,5 @@
 <?php
+
 namespace Nagy\LaraObserve;
 
 use Nagy\LaraObserve\Logger;
@@ -11,17 +12,16 @@ class LaraObserve
     public static function boot()
     {
         $formatter = new Formatter();
-        
+
         DB::listen(function ($query) use ($formatter) {
-            if (! config('LaraObserve.active')) {
+            if (!config('LaraObserve.active')) {
                 return;
             }
 
             if ($query instanceof \Illuminate\Database\Events\QueryExecuted) {
-                throw_if(
-                    $query->time > config('LaraObserve.threshold'),
-                    new SlowQueryException($formatter->setQuery($query)->format())
-                );
+                if ($query->time > config('LaraObserve.threshold')) {
+                    throw (new SlowQueryException($formatter->setQuery($query)->format()))->setRequest(request());
+                }
             }
         });
     }
