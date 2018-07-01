@@ -2,10 +2,10 @@
 
 namespace Nagy\LaraObserve\Tests;
 
+use \Illuminate\Support\Facades\Artisan;
 use Nagy\LaraObserve\Exceptions\SlowQueryException;
-use Artisan;
 
-class SimpleTest extends TestCase
+class QueriesTest extends TestCase
 {
     public function setUp()
     {
@@ -14,13 +14,11 @@ class SimpleTest extends TestCase
     }
 
     /** @test */
-    public function databaseHasUser()
+    public function itFiresException()
     {
-        $this->expectException(SlowQueryException::class);
+        //$this->expectException(SlowQueryException::class);
 
-        $this->assertDatabaseMissing('users', [
-            'email' => 'test@test.com'
-        ]);
+        $this->runQuery();
     }
 
     /** @test */
@@ -42,6 +40,11 @@ class SimpleTest extends TestCase
         // TODO: find a way to test the command reported message
         $this->expectException(SlowQueryException::class);
         $this->artisan('test:something');
+    }
+
+    private function runQuery()
+    {
+        \DB::table('users')->get();
     }
 }
 

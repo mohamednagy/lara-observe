@@ -2,25 +2,23 @@
 
 namespace Nagy\LaraObserve;
 
-use Nagy\LaraObserve\Logger;
-use Nagy\LaraObserve\Formatter;
 use Illuminate\Support\Facades\DB;
-use Nagy\LaraObserve\Exceptions\SlowQueryException;
+use Nagy\LaraObserve\DataCollectors\SlowQuery;
 
 class LaraObserve
 {
     public static function boot()
     {
-        $formatter = new Formatter();
-
-        DB::listen(function ($query) use ($formatter) {
-            if (!config('LaraObserve.active')) {
+        DB::listen(function ($query) {
+            if (!config('laraobserve.queries.active')) {
                 return;
             }
 
             if ($query instanceof \Illuminate\Database\Events\QueryExecuted) {
-                if ($query->time > config('LaraObserve.threshold')) {
-                    throw (new SlowQueryException($formatter->setQuery($query)->format()))->setRequest(request());
+                if ($query->time > config('laraobserve.queries.threshold')) {
+                    $details = (new SlowQuery($query))->collect();
+                    $listner = config('laraobserve.queries.listner');
+                    (new $listner)->handle($details);
                 }
             }
         });

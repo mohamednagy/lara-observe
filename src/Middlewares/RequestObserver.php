@@ -4,6 +4,7 @@ namespace Nagy\LaraObserve\Middlewares;
 
 use Closure;
 use Nagy\LaraObserve\SlowRequestException;
+use Nagy\LaraObserve\DataCollectors\SlowRequest;
 
 class RequestObserver
 {
@@ -15,9 +16,9 @@ class RequestObserver
 
         $executionTime = microtime(false) - $time;
         if (config('laraobserve.requests.active') && $executionTime > config('laraobserve.request.threshold')) {
-            throw (new SlowRequestException())
-                ->setRequest($request)
-                ->setResponse($response);
+            $details = (new SlowRequest($request, $response))->collect();
+            $listener = config('laraobserve.requests.listner');
+            (new $listener)->handle($details);
         }
 
         return $response;
