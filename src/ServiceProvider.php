@@ -13,7 +13,7 @@ class ServiceProvider extends LaravelServiceProvider
     public function boot()
     {
         $this->publishes([
-            __DIR__.'/../config/Laraobserve.php' => config_path('Laraobserve.php'),
+            __DIR__.'/../config/Laraobserve.php' => config_path('laraobserve.php'),
         ], 'config');
 
         // boot the observer
