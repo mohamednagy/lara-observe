@@ -26,14 +26,14 @@ abstract class TestCase extends Orchestra
             'prefix'   => '',
         ]);
         $app['config']->set('app.key', env('APP_KEY'));
-        $app['config']->set('LaraObserve.active', false);
     }
 
     public function setUpDatabase($app)
     {
+        $this->app['config']->set('laraobserve.queries.active', false);
         $this->loadMigrationsFrom(realpath(__DIR__.'/database/migrations'));
         $this->artisan('migrate');
-        $this->app['config']->set('LaraObserve.active', true);
+        $this->app['config']->set('laraobserve.queries.active', true);
 
     }
 
@@ -51,7 +51,7 @@ abstract class TestCase extends Orchestra
 
     protected function tearDown()
     {
-        $this->app['config']->set('LaraObserve.active', false);
+        $this->app['config']->set('laraobserve.queries.active', false);
         parent::tearDown();
     }
 }
